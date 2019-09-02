@@ -1,9 +1,9 @@
 import express, { Application, Request, Response } from 'express';
 
-var a = 3;
-  
-     function abc() {
-  return "asdfas";
+const a = 3;
+
+function abc() {
+  return 'asdfas';
 }
 
 const app: Application = express();

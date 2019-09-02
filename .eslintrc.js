@@ -1,11 +1,13 @@
 module.exports = {
-  parser: "@typescript-eslint/parser", // Specifies the ESLint parser
+  parser: "@typescript-eslint/parser",
   extends: [
-    "plugin:@typescript-eslint/recommended" // Uses the recommended rules from the @typescript-eslint/eslint-plugin
+    "plugin:@typescript-eslint/recommended",
+    "prettier/@typescript-eslint",
+    "plugin:prettier/recommended"
   ],
   parserOptions: {
-    ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
-    sourceType: "module" // Allows for the use of imports
+    ecmaVersion: 2018,
+    sourceType: "module"
   },
   rules: {
     "no-shadow": "warn",
@@ -16,6 +18,6 @@ module.exports = {
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/camelcase": "off",
     "@typescript-eslint/array-type": "off",
-    "@typescript-eslint/no-object-literal-type-assertion": "off"
+    "@typescript-eslint/no-object-literal-type-assertion": "off",
   }
 };

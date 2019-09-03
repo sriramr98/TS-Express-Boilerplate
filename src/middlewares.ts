@@ -1,4 +1,5 @@
 import { Application } from 'express';
+import 'dotenv/config';
 import cors from 'cors';
 import helmet from 'helmet';
 import globalLogger from './utils/logger';

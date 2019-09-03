@@ -1,5 +1,6 @@
 import express from 'express';
 import ApiRoutes from './routes';
+import Middlewares from './middlewares';
 
 class Server {
   public server: express.Application;
@@ -12,8 +13,7 @@ class Server {
 
   // Configure Express middleware.
   private middleware(): void {
-    this.server.use(express.json());
-    this.server.use(express.urlencoded({ extended: false }));
+    new Middlewares(this.server);
   }
 
   private routes(): void {

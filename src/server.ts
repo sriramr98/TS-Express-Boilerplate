@@ -1,4 +1,5 @@
 import express from 'express';
+import ApiRoutes from './routes';
 
 class Server {
   public server: express.Application;
@@ -16,9 +17,8 @@ class Server {
   }
 
   private routes(): void {
-    this.server.use('/', (req, res) => {
-      res.send('Typescript App works!!!');
-    });
+    const routesData = new ApiRoutes().getRouterData();
+    this.server.use(routesData.path, routesData.router);
   }
 }
 

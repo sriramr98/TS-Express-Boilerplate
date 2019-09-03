@@ -1,8 +1,7 @@
-import express, { Application, Request, Response } from 'express';
+import Server from './server';
 
-const app: Application = express();
-app.get('/', (req: Request, res: Response) => {
-  res.send('Working successfully');
+const PORT = process.env.PORT || 3000;
+
+Server.listen(PORT, () => {
+  console.log(`> Ready on http://localhost:${PORT}`);
 });
-
-app.listen(3000, () => console.log('> Running on http://localhost:3000'));

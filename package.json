@@ -1,11 +1,11 @@
 {
-  "name": "wf-vendor-backend",
+  "name": "express-ts-boilerplate",
   "version": "0.1.0",
-  "description": "Mavourneen vendor workflow backend",
+  "description": "Express Typescript Boilerplate",
   "main": "src/server.js",
   "author": "mymavourneen.com",
   "scripts": {
-    "start": "node dist/app.js",
+    "start": "node NODE_ENV=production dist/app.js",
     "dev": "nodemon src/app.ts",
     "build": "tsc -p ."
   },

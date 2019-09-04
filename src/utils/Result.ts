@@ -2,23 +2,26 @@ import ApiResponse from './../types/ApiResponse';
 import Error from './../types/Error';
 
 class Result<T> {
-  private data: T;
+  private data: T | null;
   private isSuccess = false;
   private error: Error | null = null;
 
-  constructor(data: T) {
+  private constructor(
+    isSuccess: boolean,
+    data: T | null = null,
+    error: Error | null = null,
+  ) {
     this.data = data;
+    this.isSuccess = isSuccess;
+    this.error = error;
   }
 
-  success(): Result<T> {
-    this.isSuccess = true;
-    return this;
+  static success<T>(data: T): Result<T> {
+    return new Result(true, data);
   }
 
-  failure(err: Error | null): Result<T> {
-    this.isSuccess = false;
-    this.error = err;
-    return this;
+  static failure<T>(err: Error | null): Result<T> {
+    return new Result<T>(false, null, err);
   }
 
   toObject(): ApiResponse<T> {

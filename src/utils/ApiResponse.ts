@@ -51,15 +51,7 @@ class ApiResponse<T> {
   }
 
   private finalResponse(statusCode: number): Response {
-    if (statusCode === 200 || statusCode === 201) {
-      return this.response
-        .status(statusCode)
-        .json(this.result.success().toObject());
-    } else {
-      return this.response
-        .status(statusCode)
-        .json(this.result.failure(null).toObject());
-    }
+    return this.response.status(statusCode).json(this.result.toObject());
   }
 }
 

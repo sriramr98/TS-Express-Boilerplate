@@ -1,6 +1,6 @@
 interface Error {
   message: string;
-  errorCode: string;
+  errorCode?: string;
 }
 
 export default Error;

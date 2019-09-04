@@ -1,12 +1,10 @@
 import mongoose from 'mongoose';
 import { logger } from './../utils/logger';
-
-const MONGODB_URI =
-  process.env.MONGODB_URI || 'mongodb://localhost:27017/vendordb';
+import Config from './config';
 
 export function connectToMongo(): void {
   mongoose
-    .connect(MONGODB_URI, {
+    .connect(Config.MONGODB_URI, {
       useNewUrlParser: true,
     })
     .then(() => logger.info(`Connected to mongodb`))

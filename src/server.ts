@@ -1,6 +1,7 @@
 import express from 'express';
 import ApiRoutes from './routes';
-import Middlewares from './middlewares';
+import Middlewares from './config/middlewares';
+import { connectToMongo } from './config/mongoose';
 
 class Server {
   public server: express.Application;
@@ -8,6 +9,7 @@ class Server {
   constructor() {
     this.server = express();
     this.middleware();
+    connectToMongo();
     this.routes();
   }
 

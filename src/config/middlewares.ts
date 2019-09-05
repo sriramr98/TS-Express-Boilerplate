@@ -9,9 +9,15 @@ class Middlewares {
 
   constructor(server: Application) {
     this.server = server;
-    server.use(cors());
-    server.use(helmet());
+    this.setupProdDeps();
     this.setupPino();
+  }
+
+  private setupProdDeps(): void {
+    if (process.env.NODE_ENV === 'production') {
+      this.server.use(cors());
+      this.server.use(helmet());
+    }
   }
 
   private setupPino(): void {

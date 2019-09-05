@@ -1,15 +1,15 @@
 import ApiResponse from './../types/ApiResponse';
-import Error from './../types/Error';
+import AppError from '../types/AppError';
 
 class Result<T> {
   private data: T | null;
   private isSuccess = false;
-  private error: Error | null = null;
+  private error: AppError | null = null;
 
   private constructor(
     isSuccess: boolean,
     data: T | null = null,
-    error: Error | null = null,
+    error: AppError | null = null,
   ) {
     this.data = data;
     this.isSuccess = isSuccess;
@@ -20,7 +20,7 @@ class Result<T> {
     return new Result(true, data);
   }
 
-  static failure<T>(err: Error | null): Result<T> {
+  static failure<T>(err: AppError | null): Result<T> {
     return new Result<T>(false, null, err);
   }
 

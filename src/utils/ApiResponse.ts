@@ -46,7 +46,7 @@ class ApiResponse<T> {
     return this.finalResponse(429);
   }
 
-  fail(): Response {
+  serverError(): Response {
     return this.finalResponse(500);
   }
 

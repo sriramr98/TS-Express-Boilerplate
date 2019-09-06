@@ -2,8 +2,8 @@ import express, { Request, Response, NextFunction } from 'express';
 import ApiRoutes from './routes';
 import Middlewares from './config/middlewares';
 import { connectToMongo } from './config/mongoose';
-import ApiResponse from './utils/ApiResponse';
-import Result from './utils/Result';
+import NotFoudException from './utils/exceptions/NotFoundException';
+import globalErrorHandler from './config/globalErrorHandler';
 
 class Server {
   public server: express.Application;
@@ -18,22 +18,11 @@ class Server {
   }
 
   private setErrorMiddlewares(): void {
-    this.server.all('*', (req: Request, res: Response) => {
-      const result = Result.failure({
-        message: `Url ${req.url} not available`,
-      });
-      return new ApiResponse(res, result).notFound();
+    this.server.all('*', (req: Request, res: Response, next: NextFunction) => {
+      return next(new NotFoudException(`Path ${req.url} not found`));
     });
 
-    this.server.use(
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      (err: Error, req: Request, res: Response, next: NextFunction) => {
-        const result = Result.failure({
-          message: 'Something went wrong from the server',
-        });
-        return new ApiResponse(res, result).serverError();
-      },
-    );
+    this.server.use(globalErrorHandler);
   }
 
   // Configure Express middleware.

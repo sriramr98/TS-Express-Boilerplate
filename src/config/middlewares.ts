@@ -1,5 +1,6 @@
 import { Application } from 'express';
 import 'dotenv/config';
+import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import globalLogger from '../utils/logger';
@@ -11,6 +12,12 @@ class Middlewares {
     this.server = server;
     this.setupProdDeps();
     this.setupPino();
+    this.setupDeps();
+  }
+
+  private setupDeps(): void {
+    this.server.use(express.json());
+    this.server.use(express.urlencoded({ extended: true }));
   }
 
   private setupProdDeps(): void {

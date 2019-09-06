@@ -1,17 +1,18 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 
-import ApiResponse from './../utils/ApiResponse';
 import Result from './../utils/Result';
 import RegisterInput from '../types/input/RegisterInput.type';
 import VendorData from './../data/VendorData';
 
 import { hashPassword } from './../utils/passwordUtils';
+import ConflictException from '../utils/exceptions/ConflictException';
 
 export default class AuthController {
   static async getRegisterController(
     req: Request,
     res: Response,
-  ): Promise<Response> {
+    next: NextFunction,
+  ): Promise<Response | undefined> {
     const vendorData: RegisterInput = {
       name: req.body.name,
       email: req.body.email,
@@ -22,10 +23,8 @@ export default class AuthController {
 
     const userWithEmail = await VendorData.getVendorWithEmail(vendorData.email);
     if (userWithEmail) {
-      const errorResult = Result.failure({
-        message: 'User with email alrßady exists',
-      });
-      return new ApiResponse(res, errorResult).conflict();
+      next(new ConflictException('User with email already exists'));
+      return;
     }
 
     const hashedPassword = await hashPassword(vendorData.password);
@@ -33,6 +32,6 @@ export default class AuthController {
 
     const savedVendor = await VendorData.insertVendor(vendorData);
     const successResult = Result.success(savedVendor);
-    return new ApiResponse(res, successResult).apiSuccess();
+    return res.json(successResult.toObject());
   }
 }

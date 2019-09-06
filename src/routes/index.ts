@@ -1,6 +1,7 @@
 import TestRoute from './testRoute';
 import RouterData from './../types/RouterData';
 import BaseRouter from './BaseRouter';
+import AuthRoutes from './authRoutes';
 
 class ApiRoutes extends BaseRouter {
   constructor() {
@@ -8,8 +9,14 @@ class ApiRoutes extends BaseRouter {
     this.initRoutes();
   }
 
+  private initAuthRoutes(): void {
+    const authRoute = new AuthRoutes().getRouterData();
+    this.router.use(authRoute.path, authRoute.router);
+  }
+
   private initRoutes(): void {
     this.initTestRoute();
+    this.initAuthRoutes();
   }
 
   private initTestRoute(): void {

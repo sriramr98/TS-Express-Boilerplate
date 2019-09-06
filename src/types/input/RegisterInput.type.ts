@@ -1,5 +1,4 @@
-import { Document } from 'mongoose';
-export default interface Vendor extends Document {
+export default interface RegisterInput {
   name: string;
   email: string;
   password: string;

@@ -7,6 +7,7 @@ class AuthRoutes extends BaseRouter {
   constructor() {
     super();
     this.setRegisterRoute();
+    this.setLoginRoute();
   }
 
   private setRegisterRoute(): void {
@@ -14,6 +15,14 @@ class AuthRoutes extends BaseRouter {
       '/register',
       AuthValidator.validateRegisterInput,
       AuthController.getRegisterController,
+    );
+  }
+
+  private setLoginRoute(): void {
+    this.router.post(
+      '/login',
+      AuthValidator.validateLoginInput,
+      AuthController.getLoginController,
     );
   }
 

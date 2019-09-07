@@ -9,4 +9,13 @@ export default class AuthValidator {
     //TODO: Add validation rules
     next();
   }
+
+  static validateLoginInput(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): void {
+    //TODO: Add validation rules
+    next();
+  }
 }

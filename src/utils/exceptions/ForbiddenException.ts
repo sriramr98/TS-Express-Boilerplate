@@ -5,6 +5,7 @@ export default class ForbiddenException extends BaseException {
     super(message, errorCode);
     Object.setPrototypeOf(this, ForbiddenException.prototype);
   }
+
   getStatusCode(): number {
     return 402;
   }

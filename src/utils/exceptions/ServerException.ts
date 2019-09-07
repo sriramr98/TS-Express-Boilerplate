@@ -5,6 +5,7 @@ export default class ServerException extends BaseException {
     super(message, errorCode);
     Object.setPrototypeOf(this, ServerException.prototype);
   }
+
   getStatusCode(): number {
     return 500;
   }

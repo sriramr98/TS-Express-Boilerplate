@@ -5,6 +5,7 @@ export default class NotFoudException extends BaseException {
     super(message, errorCode);
     Object.setPrototypeOf(this, NotFoudException.prototype);
   }
+
   getStatusCode(): number {
     return 404;
   }

@@ -2,6 +2,7 @@ import AppError from '../../types/AppError';
 
 export default abstract class BaseException extends Error {
   private errorCode: string | undefined;
+
   constructor(message: string, errorCode?: string) {
     super(message);
     this.errorCode = errorCode;

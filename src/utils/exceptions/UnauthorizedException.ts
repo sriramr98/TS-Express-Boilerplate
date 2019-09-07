@@ -5,6 +5,7 @@ export default class UnauthorizedException extends BaseException {
     super(message, errorCode);
     Object.setPrototypeOf(this, UnauthorizedException.prototype);
   }
+
   getStatusCode(): number {
     return 401;
   }

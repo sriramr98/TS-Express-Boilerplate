@@ -5,6 +5,7 @@ export default class TooManyException extends BaseException {
     super(message, errorCode);
     Object.setPrototypeOf(this, TooManyException.prototype);
   }
+
   getStatusCode(): number {
     return 429;
   }

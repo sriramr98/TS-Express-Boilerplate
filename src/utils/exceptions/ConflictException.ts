@@ -5,6 +5,7 @@ export default class ConflictException extends BaseException {
     super(message, errorCode);
     Object.setPrototypeOf(this, ConflictException.prototype);
   }
+
   getStatusCode(): number {
     return 409;
   }

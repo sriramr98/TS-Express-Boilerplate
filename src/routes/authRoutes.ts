@@ -2,6 +2,7 @@ import RouterData from './../types/RouterData';
 import BaseRouter from './BaseRouter';
 import AuthController from './../controllers/auth.controller';
 import AuthValidator from './../validators/auth.validator';
+import inputValidator from './../middlewares/validateInputMiddleware';
 
 class AuthRoutes extends BaseRouter {
   constructor() {
@@ -14,6 +15,7 @@ class AuthRoutes extends BaseRouter {
     this.router.post(
       '/register',
       AuthValidator.validateRegisterInput,
+      inputValidator,
       AuthController.getRegisterController,
     );
   }
@@ -22,6 +24,7 @@ class AuthRoutes extends BaseRouter {
     this.router.post(
       '/login',
       AuthValidator.validateLoginInput,
+      inputValidator,
       AuthController.getLoginController,
     );
   }

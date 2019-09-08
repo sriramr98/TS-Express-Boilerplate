@@ -8,7 +8,6 @@ import ConflictException from '../utils/exceptions/ConflictException';
 import NotFoudException from '../utils/exceptions/NotFoundException';
 import UnauthorizedException from '../utils/exceptions/UnauthorizedException';
 import { createJwt } from './../utils/utils';
-import { logger } from '../utils/logger';
 
 export default class AuthController {
   static async getRegisterController(

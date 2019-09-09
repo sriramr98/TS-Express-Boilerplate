@@ -4,6 +4,7 @@ import Middlewares from './config/middlewares';
 import { connectToMongo } from './config/mongoose';
 import NotFoudException from './utils/exceptions/NotFoundException';
 import globalErrorHandler from './config/globalErrorHandler';
+import connectToFirebase from './config/firebase';
 
 class Server {
   public server: express.Application;
@@ -12,6 +13,7 @@ class Server {
     this.server = express();
     this.middleware();
     connectToMongo();
+    connectToFirebase();
     this.routes();
     // IMPORTANT : MAKE SURE THIS IS ALWAYS AT THE END OF THE CONSTRUCTOR
     this.setErrorMiddlewares();

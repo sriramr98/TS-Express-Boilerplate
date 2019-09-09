@@ -48,3 +48,6 @@ node_modules/
 dist/
 
 .DS_Store
+
+# firebase credentials file
+mv-vendor-service-key.json

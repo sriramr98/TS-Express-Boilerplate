@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 
 import Result from './../utils/Result';
 import RegisterInput from '../types/input/RegisterInput.type';
-import VendorData from './../data/VendorData';
+import UserData from '../data/UserData';
 import { hashPassword, comparePassword } from './../utils/passwordUtils';
 import ConflictException from '../utils/exceptions/ConflictException';
 import NotFoudException from '../utils/exceptions/NotFoundException';
@@ -15,7 +15,7 @@ export default class AuthController {
     res: Response,
     next: NextFunction,
   ): Promise<Response | undefined> {
-    const vendorData: RegisterInput = {
+    const userData: RegisterInput = {
       name: req.body.name,
       email: req.body.email,
       password: req.body.password,
@@ -23,16 +23,16 @@ export default class AuthController {
       referralCode: req.body.referralCode,
     };
 
-    const userWithEmail = await VendorData.getVendorWithEmail(vendorData.email);
+    const userWithEmail = await UserData.getUserWithEmail(userData.email);
     if (userWithEmail) {
       next(new ConflictException('User with email already exists'));
       return;
     }
 
-    const hashedPassword = await hashPassword(vendorData.password);
-    vendorData.password = hashedPassword;
+    const hashedPassword = await hashPassword(userData.password);
+    userData.password = hashedPassword;
 
-    const savedVendor = await VendorData.insertVendor(vendorData);
+    const savedVendor = await UserData.insertUser(userData);
     const successResult = Result.success(savedVendor);
     return res.json(successResult.toObject());
   }
@@ -46,25 +46,25 @@ export default class AuthController {
       email: req.body.email,
       password: req.body.password,
     };
-    const vendorData = await VendorData.getVendorWithEmail(loginInput.email);
-    if (!vendorData) {
+    const userData = await UserData.getUserWithEmail(loginInput.email);
+    if (!userData) {
       next(new NotFoudException('Unable to find user.'));
       return;
     }
     const isPasswordValid = await comparePassword(
       loginInput.password,
-      vendorData.password,
+      userData.password,
     );
     if (!isPasswordValid) {
       next(new UnauthorizedException('Wrong password'));
       return;
     }
     const accessToken = createJwt({
-      id: vendorData._id,
+      id: userData._id,
     });
     const refreshToken = createJwt(
       {
-        id: vendorData._id,
+        id: userData._id,
       },
       true,
     );

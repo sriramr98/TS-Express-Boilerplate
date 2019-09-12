@@ -13,7 +13,7 @@ class Server {
     this.server = express();
     this.middleware();
     connectToMongo();
-    connectToFirebase();
+    // connectToFirebase();
     this.routes();
     // IMPORTANT : MAKE SURE THIS IS ALWAYS AT THE END OF THE CONSTRUCTOR
     this.setErrorMiddlewares();

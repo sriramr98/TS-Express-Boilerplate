@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose';
-import Vendor from './../types/models/Vendor.type';
+import User from '../types/models/User.type';
 
-const VendorSchema: Schema = new Schema({
+const UserSchema: Schema = new Schema({
   name: {
     type: String,
     required: true,
@@ -21,6 +21,6 @@ const VendorSchema: Schema = new Schema({
   referralCode: String,
 });
 
-const VendorModel = model<Vendor>('vendor', VendorSchema);
+const UserModel = model<User>('vendor', UserSchema);
 
-export default VendorModel;
+export default UserModel;

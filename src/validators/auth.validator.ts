@@ -11,7 +11,7 @@ export default class AuthValidator {
     body('password', 'Password must not be empty').exists(),
     body('contactNo', 'Need a valid contact number')
       .exists()
-      .isMobilePhone('en-IN', { strictMode: true }),
+      .isMobilePhone('en-IN'),
     body('referralCode')
       .optional()
       .isString(),

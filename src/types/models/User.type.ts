@@ -1,5 +1,5 @@
 import { Document } from 'mongoose';
-export default interface Vendor extends Document {
+export default interface User extends Document {
   name: string;
   email: string;
   password: string;

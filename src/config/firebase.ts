@@ -1,5 +1,5 @@
 import admin from 'firebase-admin';
-import * as serviceCreds from './../../mv-vendor-service-key.json';
+import * as serviceCreds from './../../firebase-config.json';
 import Config from './config.js';
 
 const serviceAccount = serviceCreds as admin.ServiceAccount;

@@ -50,4 +50,4 @@ dist/
 .DS_Store
 
 # firebase credentials file
-mv-vendor-service-key.json
+firebase-config.json

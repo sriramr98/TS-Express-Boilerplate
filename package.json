@@ -8,7 +8,7 @@
     "start": "NODE_ENV=production node dist/app.js",
     "dev": "nodemon src/app.ts",
     "build": "tsc -p .",
-    "test": "mocha -r ts-node/register src/**/*.spec.ts"
+    "test": "mocha --exit -r ts-node/register src/tests/*.spec.ts"
   },
   "dependencies": {
     "bcrypt": "^3.0.6",

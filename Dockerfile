@@ -1,14 +1,15 @@
-FROM node
+FROM node:10
 
 WORKDIR /usr/server
 
 COPY package*.json ./
+COPY yarn.lock ./
 
-RUN npm install
+RUN yarn
 
 COPY . .
 
-RUN npm run build
+RUN yarn run build
 COPY .env ./dist/
 
 EXPOSE 4000

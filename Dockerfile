@@ -1,16 +1,15 @@
-FROM node:10
+FROM node:10-alpine
 
 WORKDIR /usr/server
 
 COPY package*.json ./
-COPY yarn.lock ./
 
-RUN yarn
+RUN npm install
 
 COPY . .
 
-RUN yarn run build
+RUN npm run build
 COPY .env ./dist/
 
 EXPOSE 4000
-CMD ["yarn", "start"]
+CMD ["npm", "start"]

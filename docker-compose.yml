@@ -1,15 +1,34 @@
 version: '3.7'
 services:
-  app:
+  server:
     container_name: ts-boilerplate-server
     restart: always
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
     ports:
-      - '80:4000'
+      - '4000:4000'
+    volumes:
+      - /usr/server/node_modules
+      - .:/usr/server/
     links:
       - mongo
     env_file:
       - ./.env
+  test:
+    container_name: ts-boilerplate-server-test
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /usr/server/node_modules
+      - .:/usr/server/
+    links:
+      - mongo
+    env_file:
+      - ./.env
+    command:
+      - npm run test
   mongo:
     container_name: mongo
     image: mongo

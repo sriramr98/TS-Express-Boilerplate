@@ -1,5 +1,5 @@
-import ApiResponse from './../types/ApiResponse';
-import AppError from '../types/AppError';
+import ApiResponse from '../interfaces/ApiResponse';
+import AppError from '../interfaces/AppError';
 
 class Result<T> {
   private data: T | null;

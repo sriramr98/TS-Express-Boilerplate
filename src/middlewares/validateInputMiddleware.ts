@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { validationResult } from 'express-validator';
-import Result from './../utils/Result';
-import { logger } from '../utils/logger';
+import Result from '@utils/Result';
+import { logger } from '@utils/logger';
 
 export default function validateInputMiddleware(
   req: Request,

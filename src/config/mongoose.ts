@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { logger } from './../utils/logger';
+import { logger } from '@utils/logger';
 import Config from './config';
 
 export function connectToMongo(): void {

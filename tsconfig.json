@@ -8,7 +8,18 @@
     "rootDir": ".",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@config*": ["config*"],
+      "@controllers*": ["controllers*"],
+      "@middlewares*": ["middlewares*"],
+      "@models*": ["models*"],
+      "@routes*": ["routes*"],
+      "@interfaces*": ["interfaces*"],
+      "@utils*": ["utils*"],
+      "@": ["./../*"]
+    }
   },
   "exclude": ["node_modules", "firebase-config.json"]
 }

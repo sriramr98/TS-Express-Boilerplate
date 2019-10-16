@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 import admin from 'firebase-admin';
 
-import UnprocessableEntityException from '../utils/exceptions/UnprocessableEntityException';
-import UnauthorizedException from '../utils/exceptions/UnauthorizedException';
+import UnprocessableEntityException from '@utils/exceptions/UnprocessableEntityException';
+import UnauthorizedException from '@utils/exceptions/UnauthorizedException';
 
 export default async function(
   req: Request,

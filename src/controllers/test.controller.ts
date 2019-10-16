@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import Result from './../utils/Result';
+import Result from '@utils/Result';
 class TestController {
   static getOneController(req: Request, res: Response): Response {
     const result = Result.success('Test one endpoint hit..');

@@ -1,4 +1,4 @@
-import AppError from '../../types/AppError';
+import AppError from '@interfaces/AppError';
 
 export default abstract class BaseException extends Error {
   private errorCode: string | undefined;

@@ -1,5 +1,5 @@
 import TestRoute from './testRoute';
-import RouterData from './../types/RouterData';
+import RouterData from '@interfaces/RouterData';
 import BaseRouter from './BaseRouter';
 
 class ApiRoutes extends BaseRouter {

@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import RouterData from '../types/RouterData';
+import RouterData from '@interfaces/RouterData';
 
 abstract class BaseRouter {
   protected router: Router;

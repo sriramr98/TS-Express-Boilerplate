@@ -3,7 +3,7 @@ import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
-import globalLogger from '../utils/logger';
+import globalLogger from '@utils/logger';
 
 class Middlewares {
   private server: Application;

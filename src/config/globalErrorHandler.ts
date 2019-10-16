@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
-import BaseException from './../utils/exceptions/BaseException';
-import { logger } from '../utils/logger';
-import Result from '../utils/Result';
+import BaseException from '@utils/exceptions/BaseException';
+import { logger } from '@utils/logger';
+import Result from '@utils/Result';
 
 export default (
   err: Error,

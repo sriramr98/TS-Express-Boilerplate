@@ -1,9 +1,9 @@
 import { Router } from 'express';
 
-import TestController from './../controllers/test.controller';
-import RouterData from './../types/RouterData';
+import TestController from '@controllers/test.controller';
+import RouterData from '@interfaces/RouterData';
 import BaseRouter from './BaseRouter';
-import authenticateUser from './../middlewares/authenticateUser';
+import authenticateUser from '@middlewares/authenticateUser';
 
 class TestRoutes extends BaseRouter {
   constructor() {

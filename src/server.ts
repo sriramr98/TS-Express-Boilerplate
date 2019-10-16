@@ -1,10 +1,10 @@
 import express, { Request, Response, NextFunction } from 'express';
-import ApiRoutes from './routes';
-import Middlewares from './config/middlewares';
-import { connectToMongo } from './config/mongoose';
-import NotFoudException from './utils/exceptions/NotFoundException';
-import globalErrorHandler from './config/globalErrorHandler';
-import connectToFirebase from './config/firebase';
+import ApiRoutes from '@routes/index';
+import Middlewares from '@config/middlewares';
+import { connectToMongo } from '@config/mongoose';
+import NotFoudException from '@utils/exceptions/NotFoundException';
+import globalErrorHandler from '@config/globalErrorHandler';
+import connectToFirebase from '@config/firebase';
 
 class Server {
   public server: express.Application;

@@ -15,9 +15,9 @@ export default async function(
     return;
   }
   try {
-    const token = await admin.auth().verifyIdToken(authToken);
+    const token = await admin.auth().verifyIdToken(authToken, true);
     if (token) {
-      req.body.uid = token.uid;
+      res.locals.uid = token.uid;
       next();
     } else {
       next(new UnauthorizedException('Unable to authorize user'));

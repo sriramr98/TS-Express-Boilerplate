@@ -6,36 +6,24 @@ import NotFoudException from '@utils/exceptions/NotFoundException';
 import globalErrorHandler from '@config/globalErrorHandler';
 import connectToFirebase from '@config/firebase';
 
-class Server {
-  public server: express.Application;
+const server = express();
 
-  constructor() {
-    this.server = express();
-    this.middleware();
-    connectToMongo();
-    // connectToFirebase();
-    this.routes();
-    // IMPORTANT : MAKE SURE THIS IS ALWAYS AT THE END OF THE CONSTRUCTOR
-    this.setErrorMiddlewares();
-  }
+// init middlewares
+Middlewares.init(server);
 
-  private setErrorMiddlewares(): void {
-    this.server.all('*', (req: Request, res: Response, next: NextFunction) => {
-      return next(new NotFoudException(`Path ${req.url} not found`));
-    });
+connectToMongo();
+connectToFirebase();
 
-    this.server.use(globalErrorHandler);
-  }
+// setup routes
+const apiRoutesData = new ApiRoutes().getRouterData();
+server.use(apiRoutesData.path, apiRoutesData.router);
 
-  // Configure Express middleware.
-  private middleware(): void {
-    new Middlewares(this.server);
-  }
+// common error handler
+server.all('*', (req: Request, res: Response, next: NextFunction) => {
+  return next(new NotFoudException(`Path ${req.url} not found`));
+});
 
-  private routes(): void {
-    const routesData = new ApiRoutes().getRouterData();
-    this.server.use(routesData.path, routesData.router);
-  }
-}
+// global error handler
+server.use(globalErrorHandler);
 
-export default new Server().server;
+export default server;

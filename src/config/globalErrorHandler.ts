@@ -13,11 +13,11 @@ export default (
   if (err instanceof BaseException) {
     logger.error(`BaseException status code ${err.getStatusCode()}`);
     const result = Result.failure(err.getError());
-    return res.status(err.getStatusCode() || 500).json(result.toObject());
+    return res.status(err.getStatusCode() || 500).json(result);
   }
   return res.status(500).json(
     Result.failure({
       message: 'Something went wrong',
-    }).toObject(),
+    }),
   );
 };

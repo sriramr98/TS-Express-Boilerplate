@@ -8,7 +8,7 @@ import globalLogger from '@utils/logger';
 class Middlewares {
   private server: Application;
 
-  constructor(server: Application) {
+  private constructor(server: Application) {
     this.server = server;
     this.setupProdDeps();
     this.setupPino();
@@ -29,6 +29,10 @@ class Middlewares {
 
   private setupPino(): void {
     this.server.use(globalLogger.expressLogger);
+  }
+
+  static init(server: Application) {
+    return new Middlewares(server);
   }
 }
 

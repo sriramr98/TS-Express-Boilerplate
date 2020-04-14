@@ -16,15 +16,15 @@ class Result<T> {
     this.error = error;
   }
 
-  static success<T>(data: T): Result<T> {
-    return new Result(true, data);
+  static success<T>(data: T): ApiResponse<T> {
+    return new Result(true, data).toJSON();
   }
 
-  static failure<T>(err: AppError | null): Result<T> {
-    return new Result<T>(false, null, err);
+  static failure<T>(err: AppError | null): ApiResponse<T> {
+    return new Result<T>(false, null, err).toJSON();
   }
 
-  toObject(): ApiResponse<T> {
+  toJSON(): ApiResponse<T> {
     return {
       data: this.data,
       isSuccess: this.isSuccess,

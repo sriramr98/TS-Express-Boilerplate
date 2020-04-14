@@ -15,7 +15,7 @@ export default function validateInputMiddleware(
     const result = Result.failure({
       message: topError.msg,
     });
-    return res.status(400).json(result.toObject());
+    return res.status(400).json(result);
   }
   next();
   return;

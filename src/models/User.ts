@@ -1,7 +1,17 @@
-import { Schema, model } from 'mongoose';
-import User from '../interfaces/models/User.type';
+import { Schema, model, Document } from 'mongoose';
+
+export interface User extends Document {
+  name: string;
+  email: string;
+  contactNo: string;
+  address: string;
+  referralCode?: string;
+}
 
 const UserSchema: Schema = new Schema({
+  _id: {
+    type: String,
+  },
   name: {
     type: String,
     required: true,
@@ -10,17 +20,21 @@ const UserSchema: Schema = new Schema({
     type: String,
     required: true,
   },
-  password: {
-    type: String,
-    required: true,
-  },
   contactNo: {
     type: String,
     required: true,
   },
+  address: {
+    type: String,
+    required: true,
+  },
+  isAdmin: {
+    type: Boolean,
+    default: false,
+  },
   referralCode: String,
 });
 
-const UserModel = model<User>('vendor', UserSchema);
+const UserModel = model<User>('user', UserSchema);
 
 export default UserModel;

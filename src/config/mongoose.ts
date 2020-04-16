@@ -2,6 +2,8 @@ import mongoose from 'mongoose';
 import logger from '@config/winston';
 import Config from './config';
 
+mongoose.Promise = global.Promise;
+
 export function connectToMongo(): void {
   mongoose
     .connect(Config.MONGODB_URI, {

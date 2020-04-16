@@ -3,7 +3,8 @@ import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
-import globalLogger from '@utils/logger';
+import morgan from 'morgan';
+import { morganOption } from '@config/winston';
 
 class Middlewares {
   private server: Application;
@@ -11,13 +12,13 @@ class Middlewares {
   private constructor(server: Application) {
     this.server = server;
     this.setupProdDeps();
-    this.setupPino();
     this.setupDeps();
   }
 
   private setupDeps(): void {
     this.server.use(express.json());
     this.server.use(express.urlencoded({ extended: true }));
+    this.server.use(morgan('combined', morganOption));
   }
 
   private setupProdDeps(): void {
@@ -25,10 +26,6 @@ class Middlewares {
       this.server.use(cors());
       this.server.use(helmet());
     }
-  }
-
-  private setupPino(): void {
-    this.server.use(globalLogger.expressLogger);
   }
 
   static init(server: Application) {

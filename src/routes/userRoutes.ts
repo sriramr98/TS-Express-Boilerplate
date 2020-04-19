@@ -19,6 +19,12 @@ export default class UserRoutes extends BaseRouter {
         authenticateUser,
         asyncHandler(UserController.deleteAllUsersController),
       );
+
+    this.router.get(
+      '/me',
+      authenticateUser,
+      asyncHandler(UserController.getUserController),
+    );
   }
 
   getRouterData(): RouterData {

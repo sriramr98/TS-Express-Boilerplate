@@ -14,7 +14,6 @@ const UserSchema: Schema = new Schema({
   },
   name: {
     type: String,
-    required: true,
   },
   email: {
     type: String,
@@ -22,11 +21,9 @@ const UserSchema: Schema = new Schema({
   },
   contactNo: {
     type: String,
-    required: true,
   },
   address: {
     type: String,
-    required: true,
   },
   isAdmin: {
     type: Boolean,

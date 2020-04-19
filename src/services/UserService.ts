@@ -16,4 +16,18 @@ export default class UserService {
   static async findUserById(id: string): Promise<User | null> {
     return await UserModel.findById(id).lean<User>().exec();
   }
+
+  static hasCompletedRegistration(
+    user: User,
+  ): { missingFields: Array<String>; hasCompletedRegistration: Boolean } {
+    const missingFields = [];
+    if (!user.name) missingFields.push('name');
+    if (!user.address) missingFields.push('address');
+    if (!user.contactNo) missingFields.push('contactNo');
+
+    return {
+      missingFields,
+      hasCompletedRegistration: missingFields.length === 0,
+    };
+  }
 }

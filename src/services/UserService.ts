@@ -6,18 +6,14 @@ export default class UserService {
   }
 
   static async getAllUsers(): Promise<User[]> {
-    return await UserModel.find()
-      .lean()
-      .exec();
+    return await UserModel.find().lean<User>().exec();
   }
 
   static async deleteAllUsers(): Promise<void> {
     await UserModel.deleteMany({});
   }
 
-  static async findUserById(id: string): Promise<User> {
-    return await UserModel.findById(id)
-      .lean()
-      .exec();
+  static async findUserById(id: string): Promise<User | null> {
+    return await UserModel.findById(id).lean<User>().exec();
   }
 }

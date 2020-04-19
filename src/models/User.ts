@@ -6,6 +6,7 @@ export interface User extends Document {
   contactNo: string;
   address: string;
   referralCode?: string;
+  isAdmin: Boolean;
 }
 
 const UserSchema: Schema = new Schema({

@@ -1,4 +1,5 @@
 import UserModel, { User } from '@models/User';
+import admin from 'firebase-admin';
 
 export default class UserService {
   static async createNewUser(user: Partial<User>) {
@@ -17,17 +18,27 @@ export default class UserService {
     return await UserModel.findById(id).lean<User>().exec();
   }
 
-  static hasCompletedRegistration(
+  static getUserMeta(
     user: User,
-  ): { missingFields: Array<String>; hasCompletedRegistration: Boolean } {
+    userToken: admin.auth.DecodedIdToken,
+  ): {
+    missingFields: Array<String>;
+    hasCompletedRegistration: Boolean;
+    hasVerifiedEmail: Boolean;
+  } {
     const missingFields = [];
     if (!user.name) missingFields.push('name');
     if (!user.address) missingFields.push('address');
     if (!user.contactNo) missingFields.push('contactNo');
 
+    const hasCompletedRegistration = missingFields.length === 0;
+
+    const hasVerifiedEmail = userToken.email_verified;
+
     return {
       missingFields,
-      hasCompletedRegistration: missingFields.length === 0,
+      hasCompletedRegistration,
+      hasVerifiedEmail,
     };
   }
 }

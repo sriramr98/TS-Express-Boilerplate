@@ -10,11 +10,18 @@ export default class UserController {
     req: Request,
     res: Response,
   ): Promise<Response | void> {
+    const { uid: userId } = res.locals.user || {};
+
+    const userBody = req.body as User;
+    // no one should be able to modify this field through an api call
+    // TODO: Find a more efficient solution
+    delete userBody['isAdmin'];
+
     const user = {
-      _id: res.locals.uid,
-      ...(req.body as User),
+      _id: userId,
+      ...userBody,
     };
-    const userWithId = await UserService.findUserById(res.locals.uid);
+    const userWithId = await UserService.findUserById(userId);
     if (userWithId) {
       return res.status(401).json(
         Result.failure({
@@ -24,7 +31,6 @@ export default class UserController {
       );
     }
     const savedUser = await UserService.createNewUser(user);
-    logger.info({ savedUser });
     return res.json(Result.success(savedUser));
   }
 
@@ -49,17 +55,17 @@ export default class UserController {
     res: Response,
     next: NextFunction,
   ): Promise<Response | void> {
-    const userId = res.locals.uid;
+    const { uid: userId } = res.locals.user || {};
     const userData = await UserService.findUserById(userId);
     if (!userData) {
       return next(new NotFoudException('User not found'));
     }
-    const registrationMeta = UserService.hasCompletedRegistration(userData);
+    const userMeta = UserService.getUserMeta(userData, res.locals.user);
 
     return res.json(
       Result.success({
         user: userData,
-        meta: registrationMeta,
+        meta: userMeta,
       }),
     );
   }

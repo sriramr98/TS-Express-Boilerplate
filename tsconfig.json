@@ -10,6 +10,7 @@
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "baseUrl": "./src",
+    "sourceMap": true,
     "allowJs": false,
     "paths": {
       "@config*": [

@@ -5,14 +5,15 @@
   "main": "src/server.js",
   "author": "mymavourneen.com",
   "scripts": {
-    "start": "NODE_ENV=production node dist/src/app.js",
-    "dev": "nodemon",
-    "build": "tsc -p ."
+    "start": "node dist/bundle.js",
+    "build": "webpack",
+    "dev": "nodemon"
   },
   "dependencies": {
     "app-root-path": "^3.0.0",
     "bcrypt": "4.0.1",
     "cors": "^2.8.5",
+    "datadog-winston": "^1.4.0",
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
     "express-pino-logger": "^4.0.0",
@@ -41,17 +42,23 @@
     "@types/winston": "^2.4.4",
     "@typescript-eslint/eslint-plugin": "^2.0.0",
     "@typescript-eslint/parser": "^2.0.0",
-    "eslint": "6.8.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "eslint": "5",
     "eslint-config-prettier": "^6.1.0",
     "eslint-plugin-prettier": "^3.1.0",
-    "husky": "4.2.5",
-    "lint-staged": "10.1.6",
-    "nodemon": "2.0.3",
-    "pino-pretty": "4.0.0",
-    "prettier": "2.0.4",
+    "husky": "^3.0.5",
+    "lint-staged": "^9.2.5",
+    "nodemon": "^1.19.1",
+    "pino-pretty": "^3.2.1",
+    "prettier": "^1.18.2",
+    "ts-loader": "^7.0.0",
     "ts-node": "^8.3.0",
     "tsconfig-paths": "^3.9.0",
-    "typescript": "^3.6.2"
+    "tsconfig-paths-webpack-plugin": "^3.2.0",
+    "typescript": "^3.6.2",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-node-externals": "^1.7.2"
   },
   "husky": {
     "hooks": {

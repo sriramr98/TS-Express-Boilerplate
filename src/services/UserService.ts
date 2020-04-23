@@ -7,7 +7,9 @@ export default class UserService {
   }
 
   static async getAllUsers(): Promise<User[]> {
-    return await UserModel.find().lean<User>().exec();
+    return await UserModel.find()
+      .lean<User>()
+      .exec();
   }
 
   static async deleteAllUsers(): Promise<void> {
@@ -15,7 +17,9 @@ export default class UserService {
   }
 
   static async findUserById(id: string): Promise<User | null> {
-    return await UserModel.findById(id).lean<User>().exec();
+    return await UserModel.findById(id)
+      .lean<User>()
+      .exec();
   }
 
   static getUserMeta(

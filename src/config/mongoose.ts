@@ -9,6 +9,6 @@ export function connectToMongo(): void {
     .connect(Config.MONGODB_URI, {
       useNewUrlParser: true,
     })
-    .then(() => logger.info(`Connected to mongodb`))
+    .then(() => console.log('Connected to Mongodb'))
     .catch(err => logger.error('Error connecting to mongodb', err));
 }

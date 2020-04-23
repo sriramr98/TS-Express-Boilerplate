@@ -5,11 +5,13 @@ import Result from '@utils/Result';
 import logger from '@config/winston';
 import NotFoudException from '@utils/exceptions/NotFoundException';
 import errorCodes from '@config/errorCodes';
+import ConflictException from '@utils/exceptions/ConflictException';
 
 export default class UserController {
   static async registerUserDataController(
     req: Request,
     res: Response,
+    next: NextFunction,
   ): Promise<Response | void> {
     const { uid: userId } = res.locals.user || {};
 
@@ -24,11 +26,11 @@ export default class UserController {
     };
     const userWithId = await UserService.findUserById(userId);
     if (userWithId) {
-      return res.status(401).json(
-        Result.failure({
-          message: 'User already registerd',
-          errorCode: errorCodes.USER_ALREADY_REGISTERED,
-        }),
+      return next(
+        new ConflictException(
+          'User already registered',
+          errorCodes.USER_ALREADY_REGISTERED,
+        ),
       );
     }
     const savedUser = await UserService.createNewUser(user);

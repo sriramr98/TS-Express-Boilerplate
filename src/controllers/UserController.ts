@@ -4,6 +4,7 @@ import UserService from '@services/UserService';
 import Result from '@utils/Result';
 import logger from '@config/winston';
 import NotFoudException from '@utils/exceptions/NotFoundException';
+import errorCodes from '@config/errorCodes';
 
 export default class UserController {
   static async registerUserDataController(
@@ -26,7 +27,7 @@ export default class UserController {
       return res.status(401).json(
         Result.failure({
           message: 'User already registerd',
-          errorCode: 'USER_ALREADY_REGISTERED',
+          errorCode: errorCodes.USER_ALREADY_REGISTERED,
         }),
       );
     }
@@ -35,7 +36,7 @@ export default class UserController {
   }
 
   static async getAllUsersController(
-    req: Request,
+    _: Request,
     res: Response,
   ): Promise<Response | void> {
     const users = await UserService.getAllUsers();
@@ -43,7 +44,7 @@ export default class UserController {
   }
 
   static async deleteAllUsersController(
-    req: Request,
+    _: Request,
     res: Response,
   ): Promise<Response | void> {
     await UserService.deleteAllUsers();
@@ -51,7 +52,7 @@ export default class UserController {
   }
 
   static async getUserController(
-    req: Request,
+    _: Request,
     res: Response,
     next: NextFunction,
   ): Promise<Response | void> {

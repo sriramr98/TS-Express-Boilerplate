@@ -9,6 +9,12 @@ export interface User extends Document {
   isAdmin: Boolean;
 }
 
+export interface UserMeta {
+  missingFields: Array<String>;
+  completedRegistration: Boolean;
+  emailVerified: Boolean | undefined;
+}
+
 const UserSchema: Schema = new Schema({
   _id: {
     type: String,

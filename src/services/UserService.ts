@@ -1,4 +1,4 @@
-import UserModel, { User } from '@models/User';
+import UserModel, { User, UserMeta } from '@models/User';
 import admin from 'firebase-admin';
 
 export default class UserService {
@@ -25,24 +25,20 @@ export default class UserService {
   static getUserMeta(
     user: User,
     userToken: admin.auth.DecodedIdToken,
-  ): {
-    missingFields: Array<String>;
-    hasCompletedRegistration: Boolean;
-    hasVerifiedEmail: Boolean;
-  } {
+  ): UserMeta {
     const missingFields = [];
     if (!user.name) missingFields.push('name');
     if (!user.address) missingFields.push('address');
     if (!user.contactNo) missingFields.push('contactNo');
 
-    const hasCompletedRegistration = missingFields.length === 0;
+    const completedRegistration = missingFields.length === 0;
 
-    const hasVerifiedEmail = userToken.email_verified;
+    const emailVerified = userToken.email_verified;
 
     return {
       missingFields,
-      hasCompletedRegistration,
-      hasVerifiedEmail,
+      completedRegistration,
+      emailVerified,
     };
   }
 }

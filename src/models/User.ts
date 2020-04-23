@@ -6,6 +6,13 @@ export interface User extends Document {
   contactNo: string;
   address: string;
   referralCode?: string;
+  isAdmin: Boolean;
+}
+
+export interface UserMeta {
+  missingFields: Array<String>;
+  completedRegistration: Boolean;
+  emailVerified: Boolean | undefined;
 }
 
 const UserSchema: Schema = new Schema({
@@ -14,7 +21,6 @@ const UserSchema: Schema = new Schema({
   },
   name: {
     type: String,
-    required: true,
   },
   email: {
     type: String,
@@ -22,11 +28,9 @@ const UserSchema: Schema = new Schema({
   },
   contactNo: {
     type: String,
-    required: true,
   },
   address: {
     type: String,
-    required: true,
   },
   isAdmin: {
     type: Boolean,

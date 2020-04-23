@@ -51,3 +51,6 @@ dist/
 
 # firebase credentials file
 firebase-config.json
+
+# lock files
+*.lock

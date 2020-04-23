@@ -7,7 +7,7 @@ export default class UserService {
 
   static async getAllUsers(): Promise<User[]> {
     return await UserModel.find()
-      .lean()
+      .lean<User>()
       .exec();
   }
 
@@ -15,9 +15,9 @@ export default class UserService {
     await UserModel.deleteMany({});
   }
 
-  static async findUserById(id: string): Promise<User> {
+  static async findUserById(id: string): Promise<User | null> {
     return await UserModel.findById(id)
-      .lean()
+      .lean<User>()
       .exec();
   }
 }

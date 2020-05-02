@@ -1,4 +1,5 @@
-import winston, { LoggerOptions } from 'winston';
+import winston from 'winston';
+import DailyRotateFileTransport from 'winston-daily-rotate-file';
 import appRoot from 'app-root-path';
 import { Options } from 'morgan';
 import Config from '@config/config';
@@ -36,7 +37,16 @@ class Logger {
         winston.format.prettyPrint(),
         winston.format.colorize(),
       ),
-      transports: [new winston.transports.File(this.winstonConfig.file)],
+      transports: [
+        new DailyRotateFileTransport({
+          filename: 'ts-boilerplate-%DATE%.log',
+          datePattern: 'YYYY-MM-DD-HH-mm',
+          zippedArchive: true,
+          maxSize: '20m',
+          maxFiles: '14d',
+          dirname: 'logs',
+        }),
+      ],
       exitOnError: false, // do not exit on error
     });
 

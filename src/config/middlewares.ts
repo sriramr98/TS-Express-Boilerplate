@@ -17,6 +17,7 @@ class Middlewares {
   private setupDeps(): void {
     this.server.use(express.json());
     this.server.use(express.urlencoded({ extended: true }));
+    // morgan.token('id', f)
     this.server.use(morgan('combined', morganOption));
   }
 
